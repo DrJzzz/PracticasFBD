@@ -17,7 +17,9 @@ LIMIT 15;
 -- 4. Empleados del mismo estado que trabajen en distintos hoteles
 
 -- 5. Rango de precios de habitaciones por estado
-SELECT Estado, MIN(precio) as precio_minimo, MAX(precio) as precio_maximo
+SELECT Estado, MIN(precio) AS precio_minimo, MAX(precio) AS precio_maximo
+FROM Hotelotel
+GROUP BY Estado;
 
 
 -- 6. Miembros con membresia que mas eventos organizan
@@ -36,3 +38,15 @@ JOIN Hospedar HS ON H.id = HS.id_huesped
 WHERE HS.mascota = true
     AND DATEDIFF(HS.FechaCheckOut, HS.FechaCheckIn) > 5;
 
+-- 8. Empleados con el mismo horaro en un mismo hotel
+
+-- 9. Trimestre en el que organizan mas eventos
+
+-- 10. Estado con mas hoteles pet friendly
+SELECT Estado, COUNT(*) AS cantidad_hoteles
+FROM Hotel
+JOIN Ofrecer ON Hotel.id = Ofrecer.id_hotel
+WHERE Ofrecer.NombreServicio = 'petFriendly'
+GROUP BY Estado
+ORDER BY cantidad_hoteles DESC
+LIMIT 15;
