@@ -71,3 +71,6 @@ ORDER BY (SELECT COUNT(*) FROM Salon WHERE Salon.id_hotel = Hotel.id) DESC;
 -- 14. Empleados que mas tiempo tienen trabajando en el hotel
 
 -- 15. Huespedes sin membresia que tienen una tarjeta registrada
+SELECT *
+FROM Huesped
+WHERE MembresiaActiva = false AND (NumTarjeta IS NOT NULL AND NumTarjeta <> '');
