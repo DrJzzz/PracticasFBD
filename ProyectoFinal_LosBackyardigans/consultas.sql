@@ -14,6 +14,8 @@ LIMIT 15;
 
 -- 3. Clientes con membresia que no se han hospedado en un penthouse
 
+
+
 -- 4. Empleados del mismo estado que trabajen en distintos hoteles
 
 -- 5. Rango de precios de habitaciones por estado
@@ -40,7 +42,13 @@ WHERE HS.mascota = true
 
 -- 8. Empleados con el mismo horaro en un mismo hotel
 
+
 -- 9. Trimestre en el que organizan mas eventos
+SELECT CONCAT(YEAR(FechaInicio), '-', QUARTER(FechaInicio)) AS trimestre, COUNT(*) AS contador_eventos
+FROM Rentar
+GROUP BY trimestre
+ORDER BY contador_eventos DESC
+LIMIT 1;
 
 -- 10. Estado con mas hoteles pet friendly
 SELECT Estado, COUNT(*) AS cantidad_hoteles
@@ -50,3 +58,16 @@ WHERE Ofrecer.NombreServicio = 'petFriendly'
 GROUP BY Estado
 ORDER BY cantidad_hoteles DESC
 LIMIT 15;
+
+-- 11. Promedio de calificaciones de limpieza
+
+-- 12. Ordenar los hoteles por cantidad de salones
+SELECT *
+FROM Hotel
+ORDER BY (SELECT COUNT(*) FROM Salon WHERE Salon.id_hotel = Hotel.id) DESC;
+
+-- 13. Empleados que atienden penthouses y salones a la vez
+
+-- 14. Empleados que mas tiempo tienen trabajando en el hotel
+
+-- 15. Huespedes sin membresia que tienen una tarjeta registrada
